@@ -48,7 +48,7 @@ Se o troco for maior que 2, então Rebeka recebe três letras (c1, c2, c3) e som
 
             char c1, c2, c3;
             scanf(" %c %c %c", &c1, &c2, &c3);
-            ➡️printf("%d\n", (c1-'a'+1) + (c2-'a'+1) + (c3-'a'+1));
+            ❗printf("%d\n", (c1-'a'+1) + (c2-'a'+1) + (c3-'a'+1));
 
             dinheiro = 1 + troco; 
         } else {
@@ -56,11 +56,9 @@ Se o troco for maior que 2, então Rebeka recebe três letras (c1, c2, c3) e som
             dinheiro = 3;
         }
         
-➡️Todas as letras dos inputs são minúsculas, então subtraindo 'a', temos a posição (valor) de c1, c2 e c3. (+1 só pra definir 'a' como 1 e não como 0)
+❗Todas as letras dos inputs são minúsculas, então subtraindo 'a', temos a posição (valor) de c1, c2 e c3. (+1 só pra definir 'a' como 1 e não como 0)
 
 ❗Obs: Solução da IA Claude
-
-    ❗printf("%d\n", (c1-'a'+1) + (c2-'a'+1) + (c3-'a'+1));
 
 Caso não tenha sido uma divisão exata novamente, adiciona 3 reais de Rebeka e verifica se agora as porcentagens são inteiras
 
