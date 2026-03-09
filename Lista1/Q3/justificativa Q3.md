@@ -77,16 +77,18 @@ Cada homem diz a própria idade pra Rebeka verificar se pelo menos alguma é div
             int i1, i2, i3;
             scanf("%d %d %d", &i1, &i2, &i3);
 
-❗Uso dos ternários pra verificar se a idade 'i' é divisível por 3, se sim, verifica quantas vezes aparece 3 quando fatora 'i'. 
-Se o if for satisfeito, soma 4 a parcelas, se (i % 9 == 0) for satisfeito, soma 3 ao novo resultado; se (i % 27 == 0) for satisfeito, soma 2 ao novo resultado; se (i % 81 == 0) for satisfeito, soma 1 ao novo resultado 
-
-❗Obs: Solução da IA Claude
-
+Para calcular as parcelas de 3 nas idades dos homens, verifica se a idade é divisível por 3, se for, define a quantidade de parcelas como a divisão da idade por 3
 
             int parcelas = 0;
-           ❗ if (i1 % 3 == 0) { parcelas += (i1 % 9 == 0) ? (i1 % 27 == 0) ? (i1 % 81 == 0) ? 4 : 3 : 2 : 1; }
-           ❗ if (i2 % 3 == 0) { parcelas += (i2 % 9 == 0) ? (i2 % 27 == 0) ? (i2 % 81 == 0) ? 4 : 3 : 2 : 1; }
-           ❗ if (i3 % 3 == 0) { parcelas += (i3 % 9 == 0) ? (i3 % 27 == 0) ? (i3 % 81 == 0) ? 4 : 3 : 2 : 1; }
+            if (i1 % 3 == 0) { 
+                parcelas += i1/3; 
+            }
+            if (i2 % 3 == 0) { 
+                parcelas += i2/3;
+            }
+            if (i3 % 3 == 0) { 
+                parcelas += i3/3;
+            }
 
 Quantidade de parcelas de 3 na idade dos homens
 
