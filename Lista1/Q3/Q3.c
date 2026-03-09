@@ -69,10 +69,16 @@ int main(){
             scanf("%d %d %d", &i1, &i2, &i3);
 
             int parcelas = 0;
-            if (i1 % 3 == 0) { parcelas += (i1 % 9 == 0) ? (i1 % 27 == 0) ? (i1 % 81 == 0) ? 4 : 3 : 2 : 1; }
-            if (i2 % 3 == 0) { parcelas += (i2 % 9 == 0) ? (i2 % 27 == 0) ? (i2 % 81 == 0) ? 4 : 3 : 2 : 1; }
-            if (i3 % 3 == 0) { parcelas += (i3 % 9 == 0) ? (i3 % 27 == 0) ? (i3 % 81 == 0) ? 4 : 3 : 2 : 1; }
-
+            if (i1 % 3 == 0) { 
+                parcelas += i1/3; 
+            }
+            if (i2 % 3 == 0) { 
+                parcelas += i2/3;
+            }
+            if (i3 % 3 == 0) { 
+                parcelas += i3/3;
+            }
+            
             printf("%d\n", parcelas);
 
             dinheiro = 0 + troco; // 3 - 3 investido + troco
