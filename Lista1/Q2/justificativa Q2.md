@@ -1,5 +1,5 @@
 Optei por não utilizar IA na construção inicial do código  
-O meu código inicial não retornava corretamente para todos os test cases, usei a IA Claude para tirar dúvidas, e a justificativa é que eu estava usando as variáveis no formato 'int (%d)' e estava sendo gerado um Overflow, a solução foi modificar o tipo das variáveis para 'long long (%lld)'
+O meu código original não retornava corretamente para todos os test cases, usei a IA Claude para tirar dúvidas, e a justificativa é que eu estava usando as variáveis no formato 'int (%d)' e estava sendo gerado um Overflow, a solução foi modificar o tipo das variáveis para 'long long (%lld)'
 
 Usei a soma de Gauss para somar todos os números de 1 a N
     
