@@ -23,9 +23,9 @@ int main() {
             continue;
         }
 
-        int num = i;           // cópia do valor de i para fatorar sem sobrescrever i
+        int num = i; // cópia do valor de i para fatorar sem sobrescrever i
         int cont_impares = 0;  
-        int valido = 1;        // se tiver fatores primos ímpares que se repetem, não é válido
+        int valido = 1; // se tiver fatores primos ímpares que se repetem, não é válido
 
         // se o número for par, tira todos os 2 pra sobrar só a parte ímpar do número
         while (num > 0 && num % 2 == 0) {
@@ -37,12 +37,12 @@ int main() {
         for (int d = 3; d * d <= num; d += 2) {
             if (num % d == 0) {
                 cont_impares++; 
-                num /= d;       // divide uma vez.
+                num /= d; // divide uma vez.
 
                 // se depois de dividir uma vez, ele AINDA for divisível por d, tem fatores primos repetidos e não é válido
                 if (num % d == 0) {
                     valido = 0; 
-                    break;      // para de testar esse número i e pula pro próximo
+                    break; // para de testar esse número i e pula pro próximo
                 }
             }
         }
