@@ -31,7 +31,7 @@ int main() {
 
     int pares = 0; // conta os pares de anagramas
     for (int a = 0; a < n; a++) { 
-        for (int b = a + 1; b < n; b++) { // CLAUDE: = a + 1 pra não pegar o mesmo par mais de uma vez nem comparar a palavra com ela mesma
+        for (int b = a + 1; b < n; b++) { // CLAUDE: b = a + 1 pra não pegar o mesmo par mais de uma vez nem comparar a palavra com ela mesma
             int letras[26] = {0}; // vetor de todas as letras do alfabeto
             for (int k = inicio[a]; todas_palavras[k]; k++){ // percorre todas as letras da palavra a e transforma cada letra em um índice
                 char c = todas_palavras[k];
