@@ -5,7 +5,7 @@ char espaco[100][100];
 
 void colocar(int i, int j, char c) {
     if (i < 0 || i >= m || j < 0 || j >= n) return;  // fora da praça
-    if (espaco[i][j] == 'P') return;                  
+    if (espaco[i][j] == '+' && c == 'x') return;  // + tem prioridade sobre x                  
     espaco[i][j] = c;
 }
 
