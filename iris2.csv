@@ -1,0 +1,17 @@
+sepal_length,sepal_width,petal_length,petal_width,species
+6.4,3.2,4.5,1.5,Iris-versicolor
+6.9,3.1,4.9,1.5,Iris-versicolor
+5.5,2.3,4.0,1.3,Iris-versicolor
+6.5,2.8,4.6,1.5,Iris-versicolor
+6.3,3.3,6.0,2.5,Iris-virginica
+5.8,2.7,5.1,1.9,Iris-virginica
+7.1,3.0,5.9,2.1,Iris-virginica
+6.5,3.0,5.8,2.2,Iris-virginica
+
+# --- Resultados ---
+# Registros: 8
+# Media sepal_length: 6.3750
+# Media sepal_width: 2.9250
+# Media petal_length: 5.1000
+# Media petal_width: 1.8125
+# Especie predominante: Iris-versicolor
