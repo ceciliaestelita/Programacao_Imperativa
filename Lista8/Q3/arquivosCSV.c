@@ -2,20 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* ══════════════════════════════════════════
-   ESTRUTURA
-══════════════════════════════════════════ */
+// estrutura
 typedef struct {
     double sepal_length, sepal_width;
     double petal_length, petal_width;
     char   species[64];
 } IrisRecord;
 
-/* ══════════════════════════════════════════
-   PARTE 1 — GERAÇÃO DOS ARQUIVOS CSV
-══════════════════════════════════════════ */
-
-/* Dados fixos usados para preencher os arquivos */
+// geração de arquivos csv
+// dados fixos usados pra preencher os arquivos 
 static const char *CSV_LINES[] = {
     "5.1,3.5,1.4,0.2,Iris-setosa",
     "4.9,3.0,1.4,0.2,Iris-setosa",
@@ -35,21 +30,21 @@ static const char *CSV_LINES[] = {
 };
 static const int TOTAL_LINES = 15;
 
-/*
- * Cada arquivo recebe um subconjunto diferente das linhas acima,
- * usando um offset para variar o conteúdo entre os arquivos.
- */
+
+ // cada arquivo recebe um subconjunto diferente das linhas acima,
+ // usando um offset para variar o conteúdo entre os arquivos.
+
 void gerar_csvs(int n) {
     for (int i = 1; i <= n; i++) {
         char nome[32];
-        sprintf(nome, "iris%d.csv", i);         /* monta o nome dinamicamente */
+        sprintf(nome, "iris%d.csv", i);         // monta o nome dinamicamente 
 
-        FILE *fp = fopen(nome, "w");             /* abre para escrita */
+        FILE *fp = fopen(nome, "w");             // abre pra escrita 
         if (!fp) { perror(nome); continue; }
 
         fprintf(fp, "sepal_length,sepal_width,petal_length,petal_width,species\n");
 
-        /* Cada arquivo terá entre 6 e 10 linhas, com offset variado */
+        // cada arquivo tem entre 6 e 10 linhas, com offset variado 
         int qtd    = 6 + (i % 5);
         int offset = (i * 3) % TOTAL_LINES;
 
@@ -58,15 +53,12 @@ void gerar_csvs(int n) {
             fprintf(fp, "%s\n", CSV_LINES[idx]);
         }
 
-        fclose(fp);                              /* fecha imediatamente */
+        fclose(fp);                              // fecha imediatamente 
         printf("Gerado: %s (%d registros)\n", nome, qtd);
     }
 }
 
-/* ══════════════════════════════════════════
-   PARTE 2 — LEITURA COM REALLOC
-══════════════════════════════════════════ */
-
+// leitura com realloc
 int ler_csv(const char *nome, IrisRecord **registros) {
     FILE *fp = fopen(nome, "r");
     if (!fp) { fprintf(stderr, "Nao encontrado: %s\n", nome); return -1; }
@@ -76,13 +68,13 @@ int ler_csv(const char *nome, IrisRecord **registros) {
     int  capacidade = 0;
     *registros = NULL;
 
-    fgets(linha, sizeof(linha), fp);   /* pula cabeçalho */
+    fgets(linha, sizeof(linha), fp);   // pula cabeçalho 
 
     while (fgets(linha, sizeof(linha), fp)) {
         linha[strcspn(linha, "\n")] = '\0';
         if (strlen(linha) == 0) continue;
 
-        /* Dobra a capacidade quando necessário */
+        // dobra a capacidade quando necessário 
         if (count >= capacidade) {
             capacidade = (capacidade == 0) ? 8 : capacidade * 2;
             IrisRecord *tmp = realloc(*registros, capacidade * sizeof(IrisRecord));
@@ -90,7 +82,7 @@ int ler_csv(const char *nome, IrisRecord **registros) {
             *registros = tmp;
         }
 
-        /* Parseia os campos separados por vírgula */
+        // Parseia os campos separados por vírgula 
         IrisRecord r;
         char *t;
         t = strtok(linha, ","); if (!t) continue; r.sepal_length = atof(t);
@@ -108,10 +100,7 @@ int ler_csv(const char *nome, IrisRecord **registros) {
     return count;
 }
 
-/* ══════════════════════════════════════════
-   PARTE 3 — ESTATÍSTICAS
-══════════════════════════════════════════ */
-
+// estatísticas
 void calcular_medias(const IrisRecord *v, int n,
                      double *msl, double *msw,
                      double *mpl, double *mpw) {
@@ -125,7 +114,7 @@ void calcular_medias(const IrisRecord *v, int n,
     *msl /= n; *msw /= n; *mpl /= n; *mpw /= n;
 }
 
-/* Moda com desempate lexicográfico (menor nome vence) */
+// moda com desempate lexicográfico (menor nome vence) 
 void calcular_moda(const IrisRecord *v, int n, char *moda) {
     char  especies[20][64];
     int   freq[20];
@@ -151,14 +140,11 @@ void calcular_moda(const IrisRecord *v, int n, char *moda) {
     strncpy(moda, unique > 0 ? especies[melhor] : "", 63);
 }
 
-/* ══════════════════════════════════════════
-   PARTE 4 — EXIBIÇÃO E APPEND NO ARQUIVO
-══════════════════════════════════════════ */
-
+// exibe e append no arquivo
 void exibir_e_gravar(const char *nome, const IrisRecord *v, int n,
                      double msl, double msw, double mpl, double mpw,
                      const char *moda) {
-    /* Exibe no terminal */
+    // exibe no terminal 
     printf("\n+---------- %s ----------+\n", nome);
     printf("| %-12s %-11s %-12s %-11s %-18s|\n",
            "sepal_len","sepal_wid","petal_len","petal_wid","species");
@@ -178,8 +164,8 @@ void exibir_e_gravar(const char *nome, const IrisRecord *v, int n,
     printf("| Especie predominante : %-34s|\n", moda);
     printf("+-----------------------------------------------------------+\n");
 
-    /* Grava no final do próprio arquivo (append) */
-    FILE *fp = fopen(nome, "a");         /* modo "a" = não apaga, escreve no fim */
+    // grava no final do próprio arquivo (append) 
+    FILE *fp = fopen(nome, "a");         // modo "a" = não apaga, escreve no fim 
     if (!fp) { perror(nome); return; }
     fprintf(fp, "\n# --- Resultados ---\n");
     fprintf(fp, "# Registros: %d\n",             n);
@@ -191,9 +177,6 @@ void exibir_e_gravar(const char *nome, const IrisRecord *v, int n,
     fclose(fp);
 }
 
-/* ══════════════════════════════════════════
-   MAIN
-══════════════════════════════════════════ */
 int main(void) {
     int n;
     printf("Quantos arquivos CSV processar? ");
@@ -202,11 +185,10 @@ int main(void) {
         return EXIT_FAILURE;
     }
 
-    /* Gera os arquivos antes de analisar */
+    // gera os arquivos antes de analisar 
     printf("\n--- Gerando arquivos ---\n");
     gerar_csvs(n);
 
-    /* Analisa cada arquivo */
     printf("\n--- Analisando arquivos ---\n");
     for (int i = 1; i <= n; i++) {
         char nome[32];
