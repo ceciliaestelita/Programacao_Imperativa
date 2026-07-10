@@ -1,5 +1,9 @@
 # Programacao_Imperativa  
 
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+![Platform](https://img.shields.io/badge/Language-C-blue)
+![Model](https://img.shields.io/badge/Model-Imperative_Programming-orange)
+
 Repositório de acompanhamento do desenvolvimento de listas avaliativas em C  
 
 Lista 1: Condicionais  
